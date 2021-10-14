@@ -1,20 +1,11 @@
 import { Carousel } from "react-bootstrap";
+import TokenImage from '../token-image/token-image';
 
 export default function MyCarousel() {
-    const baseUrl = 'http://localhost:3001/'
-    const imageHeight = '917em';
-    const imageWidth = '600em';
     return(
         <Carousel>
             <Carousel.Item>
-
-                <img
-                    className="d-block w-100"
-                    height={imageHeight}
-                    width={imageWidth}
-                    src={`${baseUrl}1`}
-                    alt="First slide"
-                />
+                <TokenImage tokenId={1} />
 
                 <Carousel.Caption>
                     <h3>First slide label</h3>
@@ -24,13 +15,7 @@ export default function MyCarousel() {
             </Carousel.Item>
             <Carousel.Item>
 
-                <img
-                    className="d-block w-100"
-                    height={imageHeight}
-                    width={imageWidth}
-                    src={`${baseUrl}15`}
-                    alt="Second slide"
-                />
+                <TokenImage tokenId={15} />
 
                 <Carousel.Caption>
                     <h3>Second slide label</h3>
@@ -40,13 +25,7 @@ export default function MyCarousel() {
             </Carousel.Item>
             <Carousel.Item>
 
-                <img
-                    className="d-block w-100"
-                    height={imageHeight}
-                    width={imageWidth}
-                    src={`${baseUrl}30`}
-                    alt="Third slide"
-                />
+                <TokenImage tokenId={30} />
 
                 <Carousel.Caption>
                     <h3>Third slide label</h3>

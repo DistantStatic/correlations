@@ -1,5 +1,13 @@
 .stickyNav {
     position: sticky;
     top: 0;
-    z-index: 999999;
+    z-index: 1;
+}
+
+.balance {
+    margin-left: 1em;
+}
+
+.account {
+    cursor: pointer;
 }

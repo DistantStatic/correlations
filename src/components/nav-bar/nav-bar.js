@@ -15,7 +15,8 @@ export default function MyNav(props) {
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className='justify-content-end'>
-                    <Navbar.Text>{props.account ? `Using address: ${props.account}` : <a href="/">Not connected to web3</a>}</Navbar.Text>
+                    <Navbar.Text className={styles.account} onClick={props.showAccounts}>{props.account ? `Using address: ${props.account}` : <a href="/">Not connected to web3</a>}</Navbar.Text>
+                    <Navbar.Text className={styles.balance}>{props.balance ? `Balance: ${props.balance}` : ''}</Navbar.Text>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
