@@ -36,12 +36,12 @@ contract Correlations is ERC721, Ownable {
         require((mintedTokens.length + 4) < maxSupply, 'Token Limit Reached');
 
         uint8 startingTokenId = uint8(mintedTokens.length + 1);
-        uint8[] memory tokenIds;
-        for(uint i = 0; i < 5; i++){
-            uint8 tokenId = startingTokenId + uint8(i);
+        uint8[] memory tokenIds = new uint8[](5);
+        for(uint i = 0; i < tokenIds.length; i++){
+            uint tokenId = startingTokenId + i;
             _safeMint(msg.sender, tokenId);
-            mintedTokens.push(Token(tokenId));
-            tokenIds[i] = (tokenId);
+            mintedTokens.push(Token(uint8(tokenId)));
+            tokenIds[i] = uint8(tokenId);
         }
         return tokenIds;
     }
