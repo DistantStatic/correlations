@@ -79,10 +79,9 @@ export default function FrontPage() {
                     let tokenId = receipt.events.Transfer.returnValues.tokenId
                     console.log(`Minted token: ${tokenId}`)
                     setMintedToken(tokenId);
-                    resolve();
                 })
                 .catch((error, receipt) => {
-                    reject((`We have an error\n${error}\n${receipt}`))
+                    console.log(`We have an error\n${error}\n${receipt}`);
                 })
         } else {
             window.alert('Contract not deployed to detected network.')
@@ -103,7 +102,7 @@ export default function FrontPage() {
                     showReceipt();
                 })
                 .catch((error, receipt) => {
-                    reject((`We have an error\n${error}\n${receipt}`))
+                    console.loc(`We have an error\n${error}\n${receipt}`)
                 })
         } else {
             window.alert('Contract not deployed to detected network.')
