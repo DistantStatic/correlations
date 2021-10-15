@@ -38,7 +38,15 @@ export default function FrontPage() {
         const web3 = window.web3;
 
         //identify what network/blockchain we are using
-        const networkId = await web3.eth.net.getId()
+        let networkId;
+        await web3.eth.net.getId()
+            .then((results) =>{
+                console.log(results);
+                networkId = results;
+            })
+            .catch(() => {
+                alert('Not connected to a network');
+            })
         console.log(networkId);
 
         //find contract on network
@@ -92,17 +100,22 @@ export default function FrontPage() {
         if(contract) {
             let value = Web3.utils.toWei('0.5', 'ether');
             let gasEstimate;
-            gasEstimate = await contract.methods.mintToken().estimateGas({from: account, value: value});
+            gasEstimate = await contract.methods.mintTokenMulti().estimateGas({from: account, value: value});
             contract.methods.mintTokenMulti().send({from: account, value: value, gas: gasEstimate})
                 .then((receipt) => {
-                    let tokenIds = receipt.events.Transfer.returnValues.tokenIds
-                    console.log(`Minted token: ${tokenIds}`)
+                    console.log(receipt)
+                    const tokenIds = []
+                    receipt.events.Transfer.forEach(mint => {
+                        tokenIds.push(mint.returnValues.tokenId)
+                    });
+                    
+                    console.log(`Minted tokens: ${tokenIds}`)
                     setMintedTokenSeries(tokenIds);
                     getBalance();
                     showReceipt();
                 })
                 .catch((error, receipt) => {
-                    console.loc(`We have an error\n${error}\n${receipt}`)
+                    console.log(`We have an error\n${error}\n${receipt}`)
                 })
         } else {
             window.alert('Contract not deployed to detected network.')
@@ -117,10 +130,6 @@ export default function FrontPage() {
     useEffect(() => {
         getBalance();
     }, [account])
-
-    window.ethereum.on('accountsChanged', () => {
-        loadWeb3()
-    })
 
     function showMint() {
         setMintModal(true);
