@@ -1,11 +1,32 @@
+import { useState, useEffect } from 'react';
 import { Carousel } from "react-bootstrap";
-import TokenImage from '../token-image/token-image';
+import TokenImage from '../../components/token-image/token-image';
 
 export default function MyCarousel() {
+    const [tokenList, setTokenList] = useState([]);
+
+    function getRandomToken() {
+        return Math.floor(Math.random() * 49) + 1
+    }
+
+    useEffect(() =>{
+        (async () => {
+            const tokenArr = [];
+            for (let i = 0; i < 3; i++ ) {
+                let token = getRandomToken();
+                while(tokenArr.indexOf(token) >= 0){
+                    token = getRandomToken();
+                }
+                tokenArr.push(token);
+            }
+            setTokenList(tokenArr);
+        })()
+    }, [])
+
     return(
-        <Carousel>
+        <Carousel fade>
             <Carousel.Item>
-                <TokenImage tokenId={1} />
+                <TokenImage tokenId={tokenList[0]} />
 
                 <Carousel.Caption>
                     <h3>First slide label</h3>
@@ -15,7 +36,7 @@ export default function MyCarousel() {
             </Carousel.Item>
             <Carousel.Item>
 
-                <TokenImage tokenId={15} />
+                <TokenImage tokenId={tokenList[1]} />
 
                 <Carousel.Caption>
                     <h3>Second slide label</h3>
@@ -25,7 +46,7 @@ export default function MyCarousel() {
             </Carousel.Item>
             <Carousel.Item>
 
-                <TokenImage tokenId={30} />
+                <TokenImage tokenId={tokenList[2]} />
 
                 <Carousel.Caption>
                     <h3>Third slide label</h3>
