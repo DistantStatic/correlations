@@ -29,8 +29,8 @@ export default function MyCarousel() {
                 <TokenImage tokenId={tokenList[0]} />
 
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h3>Exciting Generative ArtWork!</h3>
+                    <p>High quality, low supply, extreme detail</p>
                 </Carousel.Caption>
 
             </Carousel.Item>
@@ -39,8 +39,8 @@ export default function MyCarousel() {
                 <TokenImage tokenId={tokenList[1]} />
 
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3>Uniquely generated!</h3>
+                    <p>Each piece, different from the last, yet same feel</p>
                 </Carousel.Caption>
 
             </Carousel.Item>
@@ -49,8 +49,8 @@ export default function MyCarousel() {
                 <TokenImage tokenId={tokenList[2]} />
 
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    <h3>Mint Today!</h3>
+                    <p>Supply will not last!</p>
                 </Carousel.Caption>
 
             </Carousel.Item>
