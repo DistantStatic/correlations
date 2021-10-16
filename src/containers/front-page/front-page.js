@@ -121,23 +121,22 @@ export default function FrontPage() {
             web3.eth.net.getId()
                 .then((results) =>{
                     networkId = results;
+                    //find contract on network
+                    const contractData = CorrelationsContract.networks[networkId]
+            
+                    //If we have a contract on the network, load the balance.
+                    if(contractData) {
+            
+                        //get contract deployed instance
+                        const correlationContract = new web3.eth.Contract(CorrelationsContract.abi, contractData.address)
+                        setContract(correlationContract);
+                    } else {
+                        window.alert('Contract not deployed to detected network.')
+                    }
                 })
                 .catch(() => {
                     alert('Not connected to a network');
                 })
-    
-            //find contract on network
-            const contractData = CorrelationsContract.networks[networkId]
-    
-            //If we have a contract on the network, load the balance.
-            if(contractData) {
-    
-                //get contract deployed instance
-                const correlationContract = new web3.eth.Contract(CorrelationsContract.abi, contractData.address)
-                setContract(correlationContract);
-            } else {
-                window.alert('Contract not deployed to detected network.')
-            }
         })();
         (async () => {
             web3.eth.getAccounts()
