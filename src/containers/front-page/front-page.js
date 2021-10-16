@@ -32,7 +32,7 @@ export default function FrontPage() {
             console.log('Unable to get balance')
             return
         }
-        await contract.methods.balanceOf(account).call()
+        contract.methods.balanceOf(account).call()
             .then(result => {
                 setTokenCount(result);
             })
@@ -44,21 +44,21 @@ export default function FrontPage() {
             let value = Web3.utils.toWei('0.1', 'ether');
             let error, receipt;
             //this looks insane
-            await contract.methods.mintToken().estimateGas({from: account, value: value})
+            contract.methods.mintToken().estimateGas({from: account, value: value})
                 .then(async (result) => {
                     contract.methods.mintToken().send({from: account, value: value, gas: result})
-                    .then((receipt) => {
-                        const tokenId = receipt.events.Transfer.returnValues.tokenId
-                        setMinted(tokenId);
-                        setMulti(false);
-                        getBalance();
-                        showReceipt();
-                        hideMint();
-                    })
-                    .catch((e, r) => {
-                        error = e;
-                        receipt = r;
-                    })
+                        .then((receipt) => {
+                            const tokenId = receipt.events.Transfer.returnValues.tokenId
+                            setMinted(tokenId);
+                            setMulti(false);
+                            getBalance();
+                            showReceipt();
+                            hideMint();
+                        })
+                        .catch((e, r) => {
+                            error = e;
+                            receipt = r;
+                        })
                 })
                 .catch((e, r) =>{
                     error = e;
@@ -79,22 +79,22 @@ export default function FrontPage() {
             let value = Web3.utils.toWei('0.5', 'ether');
             let error, receipt;
             //this seems insane
-            await contract.methods.mintTokenMulti().estimateGas({from: account, value: value})
+            contract.methods.mintTokenMulti().estimateGas({from: account, value: value})
                 .then(async (result) =>{
-                    await contract.methods.mintTokenMulti().send({from: account, value: value, gas: result})
-                    .then((receipt) => {
-                        const tokenIds = []
-                        receipt.events.Transfer.forEach(mint => {
-                            tokenIds.push(mint.returnValues.tokenId)
-                        });
+                    contract.methods.mintTokenMulti().send({from: account, value: value, gas: result})
+                        .then((receipt) => {
+                            const tokenIds = []
+                            receipt.events.Transfer.forEach(mint => {
+                                tokenIds.push(mint.returnValues.tokenId)
+                            });
 
-                        console.log(`Minted tokens: ${tokenIds}`)
-                        setMinted(tokenIds);
-                        setMulti(true);
-                        getBalance();
-                        showReceipt();
-                        hideMint();
-                    })
+                            console.log(`Minted tokens: ${tokenIds}`)
+                            setMinted(tokenIds);
+                            setMulti(true);
+                            getBalance();
+                            showReceipt();
+                            hideMint();
+                        })
                     .catch((e, r) => {
                         error = e;
                         receipt = r;
@@ -118,7 +118,7 @@ export default function FrontPage() {
         (async () => {
             //identify what network/blockchain we are using
             let networkId;
-            await web3.eth.net.getId()
+            web3.eth.net.getId()
                 .then((results) =>{
                     networkId = results;
                 })
@@ -140,7 +140,7 @@ export default function FrontPage() {
             }
         })();
         (async () => {
-            await web3.eth.getAccounts()
+            web3.eth.getAccounts()
                 .then(result => {
                     setAccountList(result);
                 })
