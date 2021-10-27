@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -5,11 +6,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Correlations is ERC721, Ownable {
 
+    mapping(address=>uint[]) collections;
     struct Token {
         uint8 id;
     }
-    string baseUri;
     Token[] mintedTokens;
+    string baseUri;
     uint maxSupply;
 
     constructor() ERC721("CORE", "Correlations") Ownable() {
@@ -26,6 +28,7 @@ contract Correlations is ERC721, Ownable {
 
         uint8 tokenId = uint8(mintedTokens.length + 1);
         _safeMint(msg.sender, tokenId);
+        collections[msg.sender].push(tokenId);
         mintedTokens.push(Token(tokenId));
 
         return tokenId;
@@ -33,7 +36,7 @@ contract Correlations is ERC721, Ownable {
 
     function mintTokenMulti() public payable returns(uint8[] memory){
         require(msg.value == (0.5 ether), 'Please send 0.5 ether for Multi Mint');
-        require((mintedTokens.length + 4) < maxSupply, 'Token Limit Reached');
+        require((mintedTokens.length + 4) < maxSupply, 'Token Limit Reached or Not Enough Available');
 
         uint8 startingTokenId = uint8(mintedTokens.length + 1);
         uint8[] memory tokenIds = new uint8[](5);
@@ -41,10 +44,21 @@ contract Correlations is ERC721, Ownable {
             uint tokenId = startingTokenId + i;
             _safeMint(msg.sender, tokenId);
             mintedTokens.push(Token(uint8(tokenId)));
+            collections[msg.sender].push(tokenId);
             tokenIds[i] = uint8(tokenId);
         }
         return tokenIds;
     }
+
+    function getCollection() public view returns(uint[] memory){
+        return collections[msg.sender];
+    }
+
+    function withdraw() public onlyOwner {
+        uint balance = address(this).balance;
+        payable(msg.sender).transfer(balance);
+    }
+    
 
     receive() external payable {}
 

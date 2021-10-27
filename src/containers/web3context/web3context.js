@@ -8,7 +8,7 @@ export default function Web3Container(props) {
 
     useEffect(() => {
         if (window.ethereum) {
-          const temp = new Web3('http://localhost:7545');
+          const temp = new Web3(Web3.givenProvider);
           setWeb3(temp)
   
         } else {

@@ -27,27 +27,22 @@ export default function MyCarousel() {
         <Carousel fade>
             <Carousel.Item>
                 <TokenImage tokenId={tokenList[0]} />
-
                 <Carousel.Caption>
                     <h3>Exciting Generative ArtWork!</h3>
                     <p>High quality, low supply, extreme detail</p>
                 </Carousel.Caption>
-
             </Carousel.Item>
+
             <Carousel.Item>
-
                 <TokenImage tokenId={tokenList[1]} />
-
                 <Carousel.Caption>
                     <h3>Uniquely generated!</h3>
-                    <p>Each piece, different from the last, yet same feel</p>
+                    <p>Each piece different from the last</p>
                 </Carousel.Caption>
-
             </Carousel.Item>
+
             <Carousel.Item>
-
                 <TokenImage tokenId={tokenList[2]} />
-
                 <Carousel.Caption>
                     <h3>Mint Today!</h3>
                     <p>Supply will not last!</p>

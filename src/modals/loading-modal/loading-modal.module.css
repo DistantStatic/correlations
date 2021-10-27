@@ -1,0 +1,25 @@
+.custSpinnerOne {
+    height: 12em;
+    width: 5em;
+    color:rgb(128, 240, 147);
+    text-align: center;
+}
+.custSpinnerTwo {
+    height: 14em;
+    width: 5em;
+    color:rgb(128, 204, 240);
+    text-align: center;
+}
+.custSpinnerThree {
+    height: 10em;
+    width: 5em;
+    color:lightcoral;
+    text-align: center;
+}
+
+.modContent {
+    align-content: center;
+    text-align: center;
+    max-height: fit-content;
+    height: 24em;
+}

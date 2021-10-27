@@ -33,18 +33,14 @@ export default function ReceiptModal(props) {
                     }
                 </Container>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{"text-align": "center"}}>
                 <Container>
                     {
                         !props.multi ?
-                        <span>{props.tokenId}</span> :
-                        <p>Tokens Minted: 
-                            {
-                                props.tokenId.map(token => (
-                                <span> {token} </span>
-                                ))
-                            }
-                        </p>
+                        <h2>Token Id: {props.tokenId}</h2> :
+                        props.tokenId.map(token => (
+                        <h2>Token Ids: {token} </h2>
+                        ))
                     }
                 </Container>
             </Modal.Footer>
