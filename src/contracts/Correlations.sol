@@ -59,8 +59,8 @@ contract Correlations is ERC721, Ownable {
     }
 
     function getCollection(address _address) public view returns(uint[] memory){
-        uint count = balanceOf(_address); //6
-        uint[] memory ownedTokens = new uint[](count); // [0:0, 1:0, 2:0, 3:0, 4:0, 5:0]
+        uint count = balanceOf(_address);
+        uint[] memory ownedTokens = new uint[](count);
         uint found = 0;
         for (uint i = 1; i < _tokenCount.current(); i++){
             if(ownerOf(i) == _address){
