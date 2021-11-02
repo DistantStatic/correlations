@@ -18,7 +18,7 @@ export default function FrontPage() {
     const [mintModal, setMintModal] = useState(false);
     const [receiptModal, setReceiptModal] = useState(false);
     const [loadingModal, setLoadingModal] = useState(false);
-    const [showTokenList, setShowTokenList] = useState(true);
+    const [showTokenList, setShowTokenList] = useState(false);
     const [tokenCount, setTokenCount] = useState(0);
     const [minted, setMinted] = useState('');
     const [multi, setMulti] = useState(false);

@@ -11,8 +11,8 @@ export default function TokenList(props) {
 
     useEffect(() => {
         ( async () => {
-            if (contract.methods === undefined) return;
-            const result = await contract.methods.getCollection().call({from: props.account});
+            if (contract.methods === undefined || !props.account) return;
+            const result = await contract.methods.getCollection(props.account).call();
             setTokenList(result)
         })()
         // eslint-disable-next-line 
