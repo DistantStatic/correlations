@@ -33,7 +33,6 @@ contract Correlations is ERC721, Ownable {
     function mintToken() public payable forSale returns(uint){
         require(msg.value == (0.1 ether), 'Please send 0.1 ether');
         require(_tokenCount.current() < maxSupply, 'Token Limit Reached');
-
         _tokenCount.increment();
 
         uint tokenId = _tokenCount.current();
@@ -62,7 +61,7 @@ contract Correlations is ERC721, Ownable {
         uint count = balanceOf(_address);
         uint[] memory ownedTokens = new uint[](count);
         uint found = 0;
-        for (uint i = 1; i < _tokenCount.current(); i++){
+        for (uint i = 1; i <= _tokenCount.current(); i++){
             if(ownerOf(i) == _address){
                 ownedTokens[found] = i;
                 found++;
