@@ -12,12 +12,12 @@ export default function MintModal(props) {
                 <Modal.Title>Mint Token</Modal.Title>
                 <Button variant="danger" onClick={props.hide}>x</Button>
             </Modal.Header>
-            <Modal.Body style={{"text-align": "center"}}>
+            <Modal.Body style={{"textAlign": "center"}}>
                 <Container>
                     <h3>Mint Fee: 0.1 ether each</h3>
                 </Container>
             </Modal.Body>
-            <Modal.Footer style={{"justify-content": "center"}}>
+            <Modal.Footer style={{"justifyContent": "center"}}>
                 <Button className={styles.btnLeft} onClick={props.mint}>Mint 1</Button>
                 <Button className={styles.btnRight} onClick={props.mintMulti}>Mint 5</Button>
             </Modal.Footer>

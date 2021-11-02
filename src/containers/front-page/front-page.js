@@ -26,21 +26,17 @@ export default function FrontPage() {
     const web3 = useContext(Web3Context);
     const contract = useContext(ContractContext)
 
-    //Specifically load token balance
     async function getBalance() {
-        console.log(contract);
         contract.methods.balanceOf(account).call()
             .then(result => {
                 setTokenCount(result);
             })
     }
 
-    //mint a token
     async function mint() {
         if(contract) {
             setLoadingModal(true)
             let value = Web3.utils.toWei('0.1', 'ether');
-            let error, receipt;
             //this looks insane
             //it is, but only necessary on ganache
             //contract.methods.mintToken().estimateGas({from: account, value: value})
@@ -55,10 +51,10 @@ export default function FrontPage() {
                             setMintModal(false);
                             setLoadingModal(false);
                         })
-                        .catch((e, r) => {
-                            error = e;
-                            receipt = r;
+                        .catch((error, receipt) => {
                             setLoadingModal(false)
+                            console.log(`We have an error\n${error}\n${receipt}`)
+                            alert(error)
                         })
             //    })
             //    .catch((e, r) =>{
@@ -66,21 +62,15 @@ export default function FrontPage() {
             //        receipt = r;
             //        setLoadingModal(false)
             //    })
-            if (error) {
-                console.log(`We have an error\n${error}\n${receipt}`)
-                alert(error)
-            }
         } else {
             window.alert('Contract not deployed to detected network.')
         }
     }
 
-    //mint multiple tokens
     async function mintMulti() {
         if(contract) {
             setLoadingModal(true);
             let value = Web3.utils.toWei('0.5', 'ether');
-            let error, receipt;
             //this looks insane
             //it is, but only necessary on ganache
             //contract.methods.mintTokenMulti().estimateGas({from: account, value: value})
@@ -100,21 +90,17 @@ export default function FrontPage() {
                             setMintModal(false);
                             setLoadingModal(false);
                         })
-                    .catch((e, r) => {
-                        error = e;
-                        receipt = r;
-                        setLoadingModal(false);
-                    })
+                        .catch((error, receipt) => {
+                            setLoadingModal(false)
+                            console.log(`We have an error\n${error}\n${receipt}`)
+                            alert(error)
+                        })
             //    })
             //    .catch((e, r) =>{
             //        error = e;
             //        receipt = r;
             //        setLoadingModal(false);
             //    })
-            if (error) {
-                console.log(`We have an error\n${error}\n${receipt}`)
-                alert(error)
-            }
         } else {
             window.alert('Contract not deployed to detected network.')
         }
@@ -123,11 +109,6 @@ export default function FrontPage() {
     useEffect(() => {
         if (web3 === undefined || web3.eth === undefined) return;
         (async () => {
-            /***web3.eth.getAccounts()
-                .then(result => {
-                    setAccountList(result);
-                })
-            */
            window.ethereum.request({method: 'eth_requestAccounts'})
             .then(result =>{
                 setAccount(result[0])
@@ -136,10 +117,7 @@ export default function FrontPage() {
     }, [web3])
 
     useEffect(() => {
-        if (typeof(contract.methods) === 'undefined' || (account === '0x0' || account === null || account === undefined || account === '')) {
-            console.log('Unable to get balance')
-            return
-        }
+        if (typeof(contract.methods) === 'undefined' || (account === '0x0' || account === null || account === undefined || account === '')) return;
         contract.methods.balanceOf(account).call()
             .then(result => {
                 setTokenCount(result);

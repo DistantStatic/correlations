@@ -33,7 +33,7 @@ export default function ReceiptModal(props) {
                     }
                 </Container>
             </Modal.Body>
-            <Modal.Footer style={{"text-align": "center"}}>
+            <Modal.Footer style={{"textAlign": "center"}}>
                 <Container>
                     {
                         !props.multi ?

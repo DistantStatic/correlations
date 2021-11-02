@@ -4,7 +4,7 @@ import styles from './loading-modal.module.css';
 export default function LoadingModal({show, hide}) {
 
     return (
-        <Modal show={show} static contentClassName={styles.modContent}>
+        <Modal show={show} backdrop="static" contentClassName={styles.modContent}>
             <Modal.Body>            
                 <Modal.Title>
                     Please Check Your Wallet

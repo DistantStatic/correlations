@@ -16,7 +16,7 @@ export default function TokenList(props) {
             setTokenList(result)
         })()
         // eslint-disable-next-line 
-    }, [contract])
+    }, [props.show])
 
     return(
         <Modal 
@@ -33,8 +33,8 @@ export default function TokenList(props) {
                 <Container>
                     <Carousel>
                         {tokenList.map(token => (
-                            <Carousel.Item>
-                                <TokenImage modal={true} key={token} tokenId={token} />
+                            <Carousel.Item key={token}>
+                                <TokenImage modal={true} tokenId={token} />
                                 <Carousel.Caption>
                                     <h3>{token}</h3>
                                 </Carousel.Caption>
